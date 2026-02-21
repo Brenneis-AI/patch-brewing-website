@@ -1022,9 +1022,16 @@
   </div>
 </section>
 
-<!-- Global footer loads here -->
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   function switchSeason(season) {
     document.querySelectorAll('.season-group').forEach(g => g.classList.remove('active'));
-    document.querySelectorAl
+    document.querySelectorAll('.season-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('season-' + season).classList.add('active');
+    document.querySelector('[data-season="' + season + '"]').classList.add('active');
+  }
+</script>
+
+<!-- Global footer loads here -->
+
+</body>
+</html>
