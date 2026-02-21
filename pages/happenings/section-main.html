@@ -1,8 +1,12 @@
-/* ══════════ PATCH BREWING — GLOBAL STYLES ══════════ */
-/* Load this on every page alongside the Google Fonts link below */
-/* <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"> */
-
-:root {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events | Patch Brewing Company</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
     --cream: #F5F0E8;
     --dark: #1A1D1A;
     --olive: #3D4A3A;
@@ -11,183 +15,972 @@
     --warm-white: #FAF8F4;
     --sage: #8A9A7E;
     --rust: #B5654A;
-}
+  }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
+  body {
     font-family: 'DM Sans', sans-serif;
     color: var(--dark);
     background: var(--warm-white);
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-}
+  }
 
-/* ─── SHARED SECTION STYLES ─── */
-.section-tag {
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    font-weight: 500;
-}
+  /* ─── HEADER ─── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 3rem; height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(26, 29, 26, 0.92);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  }
 
-.section-title {
+  .logo {
+    display: flex; align-items: center; gap: 0.75rem;
+    text-decoration: none; color: var(--cream);
+  }
+
+  .logo-mark {
+    width: 40px; height: 40px;
+    border: 2px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--gold);
+  }
+
+  .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem; letter-spacing: 0.04em; color: var(--cream);
+  }
+
+  .logo-text span {
+    display: block; font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    font-weight: 400; margin-top: -1px;
+  }
+
+  nav { display: flex; align-items: center; gap: 2rem; }
+
+  nav a {
+    font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--cream); opacity: 0.75;
+    transition: opacity 0.3s; font-weight: 400;
+  }
+
+  nav a:hover { opacity: 1; }
+  nav a.active { opacity: 1; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+  .nav-cta {
+    background: var(--gold); color: var(--dark) !important;
+    opacity: 1 !important; padding: 0.55rem 1.25rem;
+    border-radius: 3px; font-weight: 500;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light); }
+
+  .mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    flex-direction: column; gap: 5px; padding: 4px;
+  }
+
+  .mobile-toggle span {
+    display: block; width: 24px; height: 2px;
+    background: var(--cream); border-radius: 2px;
+  }
+
+  /* ─── PAGE HERO ─── */
+  .page-hero {
+    position: relative; height: 45vh; min-height: 340px;
+    display: flex; align-items: flex-end;
+    padding: 0 3rem 3.5rem; overflow: hidden;
+  }
+
+  .page-hero-bg {
+    position: absolute; inset: 0; background: var(--olive);
+    background-size: cover; background-position: center;
+  }
+
+  .page-hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top,
+      rgba(26,29,26,0.85) 0%, rgba(26,29,26,0.35) 50%, rgba(26,29,26,0.2) 100%);
+  }
+
+  .page-hero-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.15);
+  }
+
+  .page-hero-content {
+    position: relative; z-index: 2; max-width: 680px;
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-hero-tag {
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem; font-weight: 500;
+  }
+
+  .page-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--cream); line-height: 1.1;
+    margin-bottom: 1rem; font-weight: 400;
+  }
+
+  .page-hero p {
+    font-size: 1rem; color: rgba(245,240,232,0.65);
+    line-height: 1.7; max-width: 480px; font-weight: 300;
+  }
+
+  /* ─── SHARED ─── */
+  .section-tag {
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem; font-weight: 500;
+  }
+
+  .section-title {
     font-family: 'DM Serif Display', serif;
     font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-    color: var(--dark);
-    line-height: 1.15;
-    margin-bottom: 1rem;
-    font-weight: 400;
-}
+    color: var(--dark); line-height: 1.15;
+    margin-bottom: 1rem; font-weight: 400;
+  }
 
-/* ─── SHARED BUTTON STYLES ─── */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.75rem;
-    font-size: 0.8rem;
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.75rem; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; font-family: 'DM Sans', sans-serif;
+    font-weight: 500; border: none; cursor: pointer;
+    transition: all 0.3s; border-radius: 3px;
+  }
+
+  .btn-primary { background: var(--gold); color: var(--dark); }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── WEEKLY SCHEDULE ─── */
+  .weekly {
+    padding: 5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .weekly-header {
+    margin-bottom: 3rem;
+  }
+
+  .weekly-header p {
+    font-size: 0.95rem; color: var(--olive);
+    line-height: 1.7; font-weight: 300; max-width: 520px;
+  }
+
+  .weekly-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    border: 1px solid rgba(61,74,58,0.08);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .day-col {
+    border-right: 1px solid rgba(61,74,58,0.06);
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .day-col:last-child { border-right: none; }
+
+  .day-col.closed { opacity: 0.45; }
+
+  .day-header {
+    padding: 1rem 0.75rem;
+    text-align: center;
+    background: var(--dark);
+  }
+
+  .day-name {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .day-hours {
+    font-size: 0.65rem;
+    color: rgba(245,240,232,0.45);
+    font-weight: 300;
+    margin-top: 0.15rem;
+  }
+
+  .day-body {
+    padding: 0.75rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: white;
+  }
+
+  .day-event {
+    padding: 0.6rem 0.65rem;
+    border-radius: 4px;
+    border-left: 3px solid;
+  }
+
+  .day-event.recurring {
+    background: rgba(61,74,58,0.04);
+    border-color: var(--sage);
+  }
+
+  .day-event.music {
+    background: rgba(200,169,110,0.08);
+    border-color: var(--gold);
+  }
+
+  .day-event.food {
+    background: rgba(181,101,74,0.06);
+    border-color: var(--rust);
+  }
+
+  .day-event.special {
+    background: rgba(61,74,58,0.06);
+    border-color: var(--olive);
+  }
+
+  .day-event-time {
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    text-decoration: none;
-    font-family: 'DM Sans', sans-serif;
+    color: var(--sage);
     font-weight: 500;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-    border-radius: 3px;
-}
+    margin-bottom: 0.15rem;
+  }
 
-.btn-primary {
-    background: var(--gold);
+  .day-event-name {
+    font-size: 0.78rem;
     color: var(--dark);
-}
+    font-weight: 500;
+    line-height: 1.3;
+  }
 
-.btn-primary:hover {
-    background: var(--gold-light);
-    transform: translateY(-1px);
-}
+  .day-event-note {
+    font-size: 0.68rem;
+    color: var(--sage);
+    font-weight: 300;
+    margin-top: 0.1rem;
+  }
 
-.btn-outline {
-    background: transparent;
-    color: var(--cream);
-    border: 1px solid rgba(245, 240, 232, 0.3);
-}
-
-.btn-outline:hover {
-    border-color: var(--cream);
-    background: rgba(245, 240, 232, 0.05);
-}
-
-.btn-outline-dark {
-    background: transparent;
-    color: var(--dark);
-    border: 1px solid rgba(61, 74, 58, 0.2);
-}
-
-.btn-outline-dark:hover {
-    border-color: var(--dark);
-    background: rgba(61, 74, 58, 0.04);
-}
-
-/* ─── SHARED PAGE HERO ─── */
-.page-hero {
-    position: relative;
-    height: 45vh;
-    min-height: 340px;
-    display: flex;
-    align-items: flex-end;
-    padding: 0 3rem 3.5rem;
-    overflow: hidden;
-}
-
-.page-hero-bg {
-    position: absolute;
-    inset: 0;
-    background: var(--olive);
-    background-size: cover;
-    background-position: center;
-}
-
-.page-hero-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top,
-    rgba(26,29,26,0.85) 0%, rgba(26,29,26,0.35) 50%, rgba(26,29,26,0.2) 100%);
-}
-
-.page-hero-placeholder {
-    position: absolute;
-    inset: 0;
+  .day-closed-msg {
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.15);
-}
+    background: white;
+    padding: 1rem;
+  }
 
-.page-hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 680px;
-    animation: fadeUp 0.8s ease-out;
-}
+  .day-closed-msg span {
+    font-size: 0.75rem;
+    color: var(--sage);
+    font-weight: 300;
+    font-style: italic;
+  }
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(24px);
-    }
+  /* ─── MOBILE SCHEDULE ─── */
+  .weekly-mobile {
+    display: none;
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+  .mobile-day {
+    border: 1px solid rgba(61,74,58,0.08);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
 
-.page-hero-tag {
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
+  .mobile-day.closed { opacity: 0.5; }
+
+  .mobile-day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: var(--dark);
+  }
+
+  .mobile-day-name {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 1rem;
     font-weight: 500;
-}
+  }
 
-.page-hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    color: var(--cream);
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    font-weight: 400;
-}
-
-.page-hero p {
-    font-size: 1rem;
-    color: rgba(245,240,232,0.65);
-    line-height: 1.7;
-    max-width: 480px;
+  .mobile-day-hours {
+    font-size: 0.72rem;
+    color: rgba(245,240,232,0.45);
     font-weight: 300;
-}
+  }
 
-@media (max-width: 768px) {
-    .page-hero {
-        padding: 0 1.5rem 3rem;
-        height: 38vh;
-        min-height: 280px;
+  .mobile-day-body {
+    padding: 1rem 1.25rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  /* ─── UPCOMING EVENTS ─── */
+  .upcoming {
+    background: var(--dark);
+    padding: 5rem 3rem;
+  }
+
+  .upcoming-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .upcoming .section-title { color: var(--cream); }
+
+  .upcoming-header {
+    margin-bottom: 3rem;
+  }
+
+  .upcoming-header p {
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.7; font-weight: 300;
+    max-width: 520px;
+  }
+
+  .upcoming-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .upcoming-card {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.06);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .upcoming-card:hover {
+    background: rgba(245,240,232,0.06);
+    border-color: rgba(200,169,110,0.2);
+    transform: translateY(-2px);
+  }
+
+  .upcoming-date-block {
+    background: rgba(245,240,232,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem 0.75rem;
+    border-right: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .upcoming-month {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .upcoming-day {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--cream);
+    line-height: 1;
+    margin-top: 0.15rem;
+  }
+
+  .upcoming-dow {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    font-weight: 400;
+    margin-top: 0.15rem;
+  }
+
+  .upcoming-details {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .upcoming-event-type {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .upcoming-event-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .upcoming-event-info {
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.45);
+    font-weight: 300;
+  }
+
+  /* ─── BREWERY TOURS ─── */
+  .tours {
+    padding: 4rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .tours-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    background: var(--olive);
+    border-radius: 8px;
+    padding: 3.5rem;
+    overflow: hidden;
+  }
+
+  .tours-text .section-tag { color: var(--gold-light); }
+  .tours-text .section-title { color: var(--cream); font-size: 1.8rem; }
+
+  .tours-text p {
+    font-size: 0.92rem; color: rgba(245,240,232,0.6);
+    line-height: 1.7; font-weight: 300; margin-bottom: 1.5rem;
+  }
+
+  .tours-detail {
+    display: flex; gap: 2.5rem; margin-bottom: 1.75rem;
+  }
+
+  .tours-detail-item {}
+
+  .tours-detail-label {
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    font-weight: 500; margin-bottom: 0.2rem;
+  }
+
+  .tours-detail-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--cream);
+  }
+
+  .tours-img {
+    aspect-ratio: 4/3;
+    background: rgba(245,240,232,0.08);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(245,240,232,0.15);
+  }
+
+  /* ─── PRIVATE EVENTS CTA ─── */
+  .private-cta {
+    background: var(--cream);
+    padding: 4rem 3rem;
+    text-align: center;
+  }
+
+  .private-cta .section-title { max-width: 500px; margin: 0 auto 0.75rem; }
+
+  .private-cta p {
+    font-size: 0.95rem; color: var(--olive);
+    line-height: 1.7; font-weight: 300; margin-bottom: 1.75rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark); color: var(--cream);
+    padding: 4rem 3rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; max-width: 1200px; margin: 0 auto 3rem;
+  }
+
+  .footer-brand .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem; color: var(--cream); margin-bottom: 0.75rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.85rem; color: rgba(245,240,232,0.45);
+    line-height: 1.65; max-width: 300px; font-weight: 300;
+  }
+
+  .footer-heading {
+    font-size: 0.65rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.25rem; font-weight: 500;
+  }
+
+  .footer-links {
+    list-style: none; display: flex;
+    flex-direction: column; gap: 0.65rem;
+  }
+
+  .footer-links a {
+    color: rgba(245,240,232,0.55); text-decoration: none;
+    font-size: 0.85rem; transition: color 0.3s; font-weight: 300;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto; padding-top: 2rem;
+    border-top: 1px solid rgba(245,240,232,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .footer-copy { font-size: 0.75rem; color: rgba(245,240,232,0.3); font-weight: 300; }
+
+  .footer-socials { display: flex; gap: 1.25rem; }
+
+  .footer-socials a {
+    color: rgba(245,240,232,0.4); text-decoration: none;
+    font-size: 0.8rem; transition: color 0.3s;
+  }
+
+  .footer-socials a:hover { color: var(--gold); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .upcoming-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 0 1.5rem; }
+    nav { display: none; }
+    .mobile-toggle { display: flex; }
+
+    .page-hero { padding: 0 1.5rem 3rem; height: 38vh; min-height: 280px; }
+
+    .weekly { padding: 3.5rem 1.5rem; }
+    .weekly-grid { display: none; }
+    .weekly-mobile { display: block; }
+
+    .upcoming { padding: 3.5rem 1.5rem; }
+    .upcoming-card { grid-template-columns: 80px 1fr; }
+
+    .tours { padding: 2.5rem 1.5rem; }
+    .tours-card {
+      grid-template-columns: 1fr; padding: 2.5rem; gap: 2rem;
     }
-}
+    .tours-img { display: none; }
+
+    .private-cta { padding: 3rem 1.5rem; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    footer { padding: 3rem 1.5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Global header loads here -->
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <div class="page-hero-placeholder">&lt;src: hero — live music or crowd at outdoor stage&gt;</div>
+  </div>
+  <div class="page-hero-content">
+    <div class="page-hero-tag">What's Happening</div>
+    <h1>Events at Patch</h1>
+    <p>Live music, trivia, bingo, and more — there's always something going on. Here's what to expect each week.</p>
+  </div>
+</section>
+
+<!-- ══════════ WEEKLY SCHEDULE ══════════ -->
+<section class="weekly">
+  <div class="weekly-header">
+    <div class="section-tag">Every Week</div>
+    <h2 class="section-title">The Weekly Lineup</h2>
+    <p>These events happen every week, rain or shine. Special events and guest artists are listed below.</p>
+  </div>
+
+  <!-- Desktop 7-column grid -->
+  <div class="weekly-grid">
+    <!-- Monday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-name">Mon</div>
+        <div class="day-hours">12–8 PM</div>
+      </div>
+      <div class="day-body">
+        <div class="day-event recurring">
+          <div class="day-event-time">12:15 PM</div>
+          <div class="day-event-name">Brewery Tour</div>
+        </div>
+        <div class="day-event food">
+          <div class="day-event-time">All Day</div>
+          <div class="day-event-name">$2 Hot Dogs</div>
+        </div>
+        <div class="day-event recurring">
+          <div class="day-event-time">6:00 PM</div>
+          <div class="day-event-name">Music Bingo</div>
+          <div class="day-event-note">1st: $20 GC · 2nd: $10 GC</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tuesday -->
+    <div class="day-col closed">
+      <div class="day-header">
+        <div class="day-name">Tue</div>
+        <div class="day-hours">Closed</div>
+      </div>
+      <div class="day-closed-msg">
+        <span>Closed</span>
+      </div>
+    </div>
+
+    <!-- Wednesday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-name">Wed</div>
+        <div class="day-hours">12–8 PM</div>
+      </div>
+      <div class="day-body">
+        <div class="day-event recurring">
+          <div class="day-event-time">12:15 PM</div>
+          <div class="day-event-name">Brewery Tour</div>
+        </div>
+        <div class="day-event food">
+          <div class="day-event-time">All Day</div>
+          <div class="day-event-name">$7 Cheeseburgers</div>
+        </div>
+        <div class="day-event recurring">
+          <div class="day-event-time">6:00 PM</div>
+          <div class="day-event-name">Team Trivia</div>
+          <div class="day-event-note">1st: $50 GC · 2nd: $20 GC</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thursday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-name">Thu</div>
+        <div class="day-hours">12–9 PM</div>
+      </div>
+      <div class="day-body">
+        <div class="day-event recurring">
+          <div class="day-event-time">12:15 PM</div>
+          <div class="day-event-name">Brewery Tour</div>
+        </div>
+        <div class="day-event food">
+          <div class="day-event-time">After 5 PM</div>
+          <div class="day-event-name">$5 Pints</div>
+          <div class="day-event-note">½ off shareables after 5</div>
+        </div>
+        <div class="day-event recurring">
+          <div class="day-event-time">6:00 PM</div>
+          <div class="day-event-name">Cards Night</div>
+          <div class="day-event-note">Table winner: $10 GC</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Friday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-name">Fri</div>
+        <div class="day-hours">12–9 PM</div>
+      </div>
+      <div class="day-body">
+        <div class="day-event recurring">
+          <div class="day-event-time">12:15 PM</div>
+          <div class="day-event-name">Brewery Tour</div>
+        </div>
+        <div class="day-event music">
+          <div class="day-event-time">6:30 PM</div>
+          <div class="day-event-name">Live Music</div>
+          <div class="day-event-note">See upcoming artists below</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saturday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-name">Sat</div>
+        <div class="day-hours">12–9 PM</div>
+      </div>
+      <div class="day-body">
+        <div class="day-event recurring">
+          <div class="day-event-time">12:15 PM</div>
+          <div class="day-event-name">Brewery Tour</div>
+        </div>
+        <div class="day-event food">
+          <div class="day-event-time">Varies</div>
+          <div class="day-event-name">Guest Food Truck</div>
+          <div class="day-event-note">See upcoming schedule below</div>
+        </div>
+        <div class="day-event music">
+          <div class="day-event-time">6:00 PM</div>
+          <div class="day-event-name">Live Music</div>
+          <div class="day-event-note">See upcoming artists below</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sunday -->
+    <div class="day-col">
+      <div class="day-header">
+        <div class="day-name">Sun</div>
+        <div class="day-hours">12–8 PM</div>
+      </div>
+      <div class="day-body">
+        <div class="day-event music">
+          <div class="day-event-time">2:00 PM</div>
+          <div class="day-event-name">Live Music</div>
+          <div class="day-event-note">Alternating Sundays</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile layout -->
+  <div class="weekly-mobile">
+    <div class="mobile-day">
+      <div class="mobile-day-header">
+        <span class="mobile-day-name">Monday</span>
+        <span class="mobile-day-hours">12–8 PM</span>
+      </div>
+      <div class="mobile-day-body">
+        <div class="day-event recurring"><div class="day-event-time">12:15 PM</div><div class="day-event-name">Brewery Tour</div></div>
+        <div class="day-event food"><div class="day-event-time">All Day</div><div class="day-event-name">$2 Hot Dogs</div></div>
+        <div class="day-event recurring"><div class="day-event-time">6:00 PM</div><div class="day-event-name">Music Bingo</div><div class="day-event-note">1st: $20 GC · 2nd: $10 GC</div></div>
+      </div>
+    </div>
+    <div class="mobile-day closed">
+      <div class="mobile-day-header">
+        <span class="mobile-day-name">Tuesday</span>
+        <span class="mobile-day-hours">Closed</span>
+      </div>
+    </div>
+    <div class="mobile-day">
+      <div class="mobile-day-header">
+        <span class="mobile-day-name">Wednesday</span>
+        <span class="mobile-day-hours">12–8 PM</span>
+      </div>
+      <div class="mobile-day-body">
+        <div class="day-event recurring"><div class="day-event-time">12:15 PM</div><div class="day-event-name">Brewery Tour</div></div>
+        <div class="day-event food"><div class="day-event-time">All Day</div><div class="day-event-name">$7 Cheeseburgers</div></div>
+        <div class="day-event recurring"><div class="day-event-time">6:00 PM</div><div class="day-event-name">Team Trivia</div><div class="day-event-note">1st: $50 GC · 2nd: $20 GC</div></div>
+      </div>
+    </div>
+    <div class="mobile-day">
+      <div class="mobile-day-header">
+        <span class="mobile-day-name">Thursday</span>
+        <span class="mobile-day-hours">12–9 PM</span>
+      </div>
+      <div class="mobile-day-body">
+        <div class="day-event recurring"><div class="day-event-time">12:15 PM</div><div class="day-event-name">Brewery Tour</div></div>
+        <div class="day-event food"><div class="day-event-time">After 5 PM</div><div class="day-event-name">$5 Pints · ½ Off Shareables</div></div>
+        <div class="day-event recurring"><div class="day-event-time">6:00 PM</div><div class="day-event-name">Cards Night</div><div class="day-event-note">Table winner: $10 GC</div></div>
+      </div>
+    </div>
+    <div class="mobile-day">
+      <div class="mobile-day-header">
+        <span class="mobile-day-name">Friday</span>
+        <span class="mobile-day-hours">12–9 PM</span>
+      </div>
+      <div class="mobile-day-body">
+        <div class="day-event recurring"><div class="day-event-time">12:15 PM</div><div class="day-event-name">Brewery Tour</div></div>
+        <div class="day-event music"><div class="day-event-time">6:30 PM</div><div class="day-event-name">Live Music</div><div class="day-event-note">See upcoming artists below</div></div>
+      </div>
+    </div>
+    <div class="mobile-day">
+      <div class="mobile-day-header">
+        <span class="mobile-day-name">Saturday</span>
+        <span class="mobile-day-hours">12–9 PM</span>
+      </div>
+      <div class="mobile-day-body">
+        <div class="day-event recurring"><div class="day-event-time">12:15 PM</div><div class="day-event-name">Brewery Tour</div></div>
+        <div class="day-event food"><div class="day-event-time">Varies</div><div class="day-event-name">Guest Food Truck</div></div>
+        <div class="day-event music"><div class="day-event-time">6:00 PM</div><div class="day-event-name">Live Music</div><div class="day-event-note">See upcoming artists below</div></div>
+      </div>
+    </div>
+    <div class="mobile-day">
+      <div class="mobile-day-header">
+        <span class="mobile-day-name">Sunday</span>
+        <span class="mobile-day-hours">12–8 PM</span>
+      </div>
+      <div class="mobile-day-body">
+        <div class="day-event music"><div class="day-event-time">2:00 PM</div><div class="day-event-name">Live Music</div><div class="day-event-note">Alternating Sundays</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ UPCOMING EVENTS ══════════ -->
+<section class="upcoming">
+  <div class="upcoming-inner">
+    <div class="upcoming-header">
+      <div class="section-tag">Coming Up</div>
+      <h2 class="section-title">Upcoming Events</h2>
+      <p>Special events, guest artists, and featured food trucks. Updated regularly.</p>
+    </div>
+
+    <div class="upcoming-grid">
+      <!-- Example events pulled from Jan calendar — replace with current month -->
+      <div class="upcoming-card">
+        <div class="upcoming-date-block">
+          <span class="upcoming-month">Feb</span>
+          <span class="upcoming-day">7</span>
+          <span class="upcoming-dow">Fri</span>
+        </div>
+        <div class="upcoming-details">
+          <div class="upcoming-event-type">Live Music</div>
+          <div class="upcoming-event-name">Travis Elliot &amp; Friends</div>
+          <div class="upcoming-event-info">6:30 PM · Outdoor Stage</div>
+        </div>
+      </div>
+
+      <div class="upcoming-card">
+        <div class="upcoming-date-block">
+          <span class="upcoming-month">Feb</span>
+          <span class="upcoming-day">8</span>
+          <span class="upcoming-dow">Sat</span>
+        </div>
+        <div class="upcoming-details">
+          <div class="upcoming-event-type">Live Music + Food Truck</div>
+          <div class="upcoming-event-name">Josh Davidson</div>
+          <div class="upcoming-event-info">6–9 PM · Barry's BBQ 4–8 PM</div>
+        </div>
+      </div>
+
+      <div class="upcoming-card">
+        <div class="upcoming-date-block">
+          <span class="upcoming-month">Feb</span>
+          <span class="upcoming-day">14</span>
+          <span class="upcoming-dow">Fri</span>
+        </div>
+        <div class="upcoming-details">
+          <div class="upcoming-event-type">Live Music</div>
+          <div class="upcoming-event-name">Steve Lanza + Friends</div>
+          <div class="upcoming-event-info">6:30 PM · Outdoor Stage</div>
+        </div>
+      </div>
+
+      <div class="upcoming-card">
+        <div class="upcoming-date-block">
+          <span class="upcoming-month">Feb</span>
+          <span class="upcoming-day">15</span>
+          <span class="upcoming-dow">Sat</span>
+        </div>
+        <div class="upcoming-details">
+          <div class="upcoming-event-type">Live Music + Food Truck</div>
+          <div class="upcoming-event-name">Loya Brothers</div>
+          <div class="upcoming-event-info">6–9 PM · Barry's BBQ 4–8 PM</div>
+        </div>
+      </div>
+
+      <div class="upcoming-card">
+        <div class="upcoming-date-block">
+          <span class="upcoming-month">Feb</span>
+          <span class="upcoming-day">21</span>
+          <span class="upcoming-dow">Fri</span>
+        </div>
+        <div class="upcoming-details">
+          <div class="upcoming-event-type">Live Music</div>
+          <div class="upcoming-event-name">Steve Lanza + Friends</div>
+          <div class="upcoming-event-info">6:30 PM · Outdoor Stage</div>
+        </div>
+      </div>
+
+      <div class="upcoming-card">
+        <div class="upcoming-date-block">
+          <span class="upcoming-month">Feb</span>
+          <span class="upcoming-day">22</span>
+          <span class="upcoming-dow">Sat</span>
+        </div>
+        <div class="upcoming-details">
+          <div class="upcoming-event-type">Live Music + Food Truck</div>
+          <div class="upcoming-event-name">Virginia Green</div>
+          <div class="upcoming-event-info">6–9 PM · Barry's BBQ &amp; Cuba-Mex</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ BREWERY TOURS ─── -->
+<section class="tours">
+  <div class="tours-card">
+    <div class="tours-text">
+      <div class="section-tag">Daily Experience</div>
+      <h2 class="section-title">Brewery Tours</h2>
+      <p>Come see where the magic happens. Our daily brewery tour takes you behind the scenes of our on-site brewing operation. No reservation needed — just show up.</p>
+      <div class="tours-detail">
+        <div class="tours-detail-item">
+          <div class="tours-detail-label">Time</div>
+          <div class="tours-detail-value">12:15 PM</div>
+        </div>
+        <div class="tours-detail-item">
+          <div class="tours-detail-label">Days</div>
+          <div class="tours-detail-value">Mon, Wed–Sun</div>
+        </div>
+        <div class="tours-detail-item">
+          <div class="tours-detail-label">Cost</div>
+          <div class="tours-detail-value">Free</div>
+        </div>
+      </div>
+    </div>
+    <div class="tours-img">&lt;src: brewery / brewing equipment photo&gt;</div>
+  </div>
+</section>
+
+<!-- ══════════ PRIVATE EVENTS CTA ══════════ -->
+<section class="private-cta">
+  <div class="section-tag">Private Events</div>
+  <h2 class="section-title">Planning Something Bigger?</h2>
+  <p>Rent the lounge, pavilion, or the entire taproom for your next event.</p>
+  <a href="/private-events" class="btn btn-primary">View Private Events →</a>
+</section>
+
+<!-- Global footer loads here -->
+
+</body>
+</html>
