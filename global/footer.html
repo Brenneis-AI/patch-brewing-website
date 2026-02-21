@@ -1,0 +1,163 @@
+<!-- ══════════ GLOBAL FOOTER ══════════ -->
+<!-- Add this CSS to your global styles or site-wide stylesheet -->
+<style>
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 4rem 3rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+  }
+
+  .footer-brand .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-brand .logo-text span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    color: rgba(245, 240, 232, 0.45);
+    line-height: 1.65;
+    max-width: 300px;
+    font-weight: 300;
+  }
+
+  .footer-heading {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer-links a {
+    color: rgba(245, 240, 232, 0.55);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+    font-weight: 300;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245, 240, 232, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(245, 240, 232, 0.3);
+    font-weight: 300;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .footer-socials a {
+    color: rgba(245, 240, 232, 0.4);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.3s;
+  }
+
+  .footer-socials a:hover { color: var(--gold); }
+
+  @media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 768px) {
+    footer { padding: 3rem 1.5rem 2rem; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+</style>
+
+<!-- Footer HTML -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">
+        Patch Brewing Co.
+        <span>Gordonsville, Virginia</span>
+      </div>
+      <p>Award-winning beers, mouthwatering smash burgers, and vibes for days. Bring the family and enjoy live music, community events, and more.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Visit</div>
+      <ul class="footer-links">
+        <li><a href="https://maps.google.com/?q=10271+Gordon+Ave+Gordonsville+VA+22942" target="_blank">10271 Gordon Ave</a></li>
+        <li><a href="https://maps.google.com/?q=10271+Gordon+Ave+Gordonsville+VA+22942" target="_blank">Gordonsville, VA 22942</a></li>
+        <li><a href="tel:5404668536">(540) 466-8536</a></li>
+        <li><a href="mailto:info@patchbrewingco.com">info@patchbrewingco.com</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Explore</div>
+      <ul class="footer-links">
+        <li><a href="/menu">Menu</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/private-events">Private Events</a></li>
+        <li><a href="/order" target="_blank">Order Online</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Hours</div>
+      <ul class="footer-links">
+        <li><a href="#">Mon: 12–8 PM</a></li>
+        <li><a href="#">Tue: Closed</a></li>
+        <li><a href="#">Wed–Thu: 12–8 PM</a></li>
+        <li><a href="#">Fri–Sat: 12–9 PM</a></li>
+        <li><a href="#">Sun: 12–8 PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Patch Brewing Company. All rights reserved.</div>
+    <div class="footer-socials">
+      <a href="https://facebook.com/patchbrewingco" target="_blank">Facebook</a>
+      <a href="https://instagram.com/patchbrewingco" target="_blank">Instagram</a>
+      <a href="https://tiktok.com/@patchbrewingco" target="_blank">TikTok</a>
+    </div>
+  </div>
+</footer>

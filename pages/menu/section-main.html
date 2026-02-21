@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu | Patch Brewing Company</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1D1A;
+    --olive: #3D4A3A;
+    --gold: #C8A96E;
+    --gold-light: #DAC49A;
+    --warm-white: #FAF8F4;
+    --sage: #8A9A7E;
+    --rust: #B5654A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--dark);
+    background: var(--warm-white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 3rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(26, 29, 26, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .logo {
+    display: flex; align-items: center; gap: 0.75rem;
+    text-decoration: none; color: var(--cream);
+  }
+
+  .logo-mark {
+    width: 40px; height: 40px;
+    border: 2px solid var(--gold); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: var(--gold);
+  }
+
+  .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem; letter-spacing: 0.04em; color: var(--cream);
+  }
+
+  .logo-text span {
+    display: block; font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    font-weight: 400; margin-top: -1px;
+  }
+
+  nav { display: flex; align-items: center; gap: 2rem; }
+
+  nav a {
+    font-size: 0.8rem; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--cream); opacity: 0.75;
+    transition: opacity 0.3s; font-weight: 400;
+  }
+
+  nav a:hover { opacity: 1; }
+  nav a.active { opacity: 1; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+  .nav-cta {
+    background: var(--gold); color: var(--dark) !important;
+    opacity: 1 !important; padding: 0.55rem 1.25rem;
+    border-radius: 3px; font-weight: 500;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light); }
+
+  .mobile-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    flex-direction: column; gap: 5px; padding: 4px;
+  }
+
+  .mobile-toggle span {
+    display: block; width: 24px; height: 2px;
+    background: var(--cream); border-radius: 2px;
+  }
+
+  /* ─── PAGE HERO ─── */
+  .page-hero {
+    position: relative; height: 45vh; min-height: 340px;
+    display: flex; align-items: flex-end;
+    padding: 0 3rem 3.5rem; overflow: hidden;
+  }
+
+  .page-hero-bg {
+    position: absolute; inset: 0; background: var(--olive);
+    background-size: cover; background-position: center;
+  }
+
+  .page-hero-bg::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top,
+      rgba(26,29,26,0.85) 0%, rgba(26,29,26,0.35) 50%, rgba(26,29,26,0.2) 100%);
+  }
+
+  .page-hero-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.15);
+  }
+
+  .page-hero-content {
+    position: relative; z-index: 2; max-width: 680px;
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-hero-tag {
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem; font-weight: 500;
+  }
+
+  .page-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--cream); line-height: 1.1;
+    margin-bottom: 1rem; font-weight: 400;
+  }
+
+  .page-hero p {
+    font-size: 1rem; color: rgba(245,240,232,0.65);
+    line-height: 1.7; max-width: 480px; font-weight: 300;
+  }
+
+  /* ─── MENU NAV ─── */
+  .menu-nav {
+    position: sticky;
+    top: 72px;
+    z-index: 50;
+    background: var(--warm-white);
+    border-bottom: 1px solid rgba(61,74,58,0.08);
+    padding: 0 3rem;
+    display: flex;
+    gap: 0;
+  }
+
+  .menu-nav a {
+    padding: 1rem 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--sage);
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+  }
+
+  .menu-nav a:hover { color: var(--dark); }
+  .menu-nav a.active { color: var(--dark); border-bottom-color: var(--gold); }
+
+  /* ─── SHARED ─── */
+  .section-tag {
+    font-size: 0.65rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem; font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    color: var(--dark); line-height: 1.15;
+    margin-bottom: 1rem; font-weight: 400;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.75rem; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; font-family: 'DM Sans', sans-serif;
+    font-weight: 500; border: none; cursor: pointer;
+    transition: all 0.3s; border-radius: 3px;
+  }
+
+  .btn-primary { background: var(--gold); color: var(--dark); }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── FOOD MENU ─── */
+  .food-menu {
+    padding: 4rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .food-menu-header {
+    margin-bottom: 3rem;
+  }
+
+  .food-menu-header p {
+    font-size: 0.95rem; color: var(--olive);
+    line-height: 1.7; font-weight: 300; max-width: 520px;
+  }
+
+  .menu-category {
+    margin-bottom: 3.5rem;
+  }
+
+  .menu-category-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem; color: var(--dark);
+    margin-bottom: 0.35rem; font-weight: 400;
+  }
+
+  .menu-category-note {
+    font-size: 0.8rem; color: var(--sage);
+    font-weight: 300; margin-bottom: 1.75rem;
+    font-style: italic;
+  }
+
+  .menu-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .menu-item {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(61,74,58,0.06);
+    transition: background 0.3s;
+  }
+
+  .menu-item:hover { background: rgba(61,74,58,0.02); }
+
+  .menu-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .menu-item-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--dark);
+  }
+
+  .menu-item-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--dark);
+    white-space: nowrap;
+  }
+
+  .menu-item-desc {
+    font-size: 0.82rem;
+    color: var(--sage);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* Toppings / Extras */
+  .menu-extras {
+    background: rgba(61,74,58,0.03);
+    border: 1px solid rgba(61,74,58,0.06);
+    border-radius: 6px;
+    padding: 1.5rem 1.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .menu-extras-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--olive);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .menu-extras-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.5rem;
+  }
+
+  .menu-extras-item {
+    font-size: 0.8rem;
+    color: var(--sage);
+    font-weight: 300;
+  }
+
+  .menu-extras-item strong {
+    color: var(--olive);
+    font-weight: 500;
+  }
+
+  /* ─── ON TAP ─── */
+  .on-tap {
+    background: var(--dark);
+    padding: 5rem 3rem;
+  }
+
+  .on-tap-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .on-tap-header {
+    margin-bottom: 3rem;
+  }
+
+  .on-tap .section-title { color: var(--cream); }
+
+  .on-tap-header p {
+    font-size: 0.95rem;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.7; font-weight: 300;
+    max-width: 520px;
+  }
+
+  .tap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(245,240,232,0.06);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .tap-item {
+    background: var(--dark);
+    padding: 1.5rem 1.75rem;
+    transition: background 0.3s;
+  }
+
+  .tap-item:hover { background: rgba(245,240,232,0.03); }
+
+  .tap-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.35rem;
+    gap: 1rem;
+  }
+
+  .tap-item-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+  }
+
+  .tap-item-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .tap-item-style {
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.5);
+    font-weight: 300;
+    margin-bottom: 0.25rem;
+  }
+
+  .tap-item-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .tap-item-abv {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.35);
+    font-weight: 500;
+  }
+
+  .tap-item-award {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .tap-item-award::before {
+    content: '🏅';
+    font-size: 0.85rem;
+  }
+
+  /* ─── ALSO AVAILABLE ─── */
+  .also-available {
+    padding: 4rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .also-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .also-card {
+    background: rgba(61,74,58,0.03);
+    border: 1px solid rgba(61,74,58,0.06);
+    border-radius: 6px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .also-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .also-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .also-desc {
+    font-size: 0.82rem;
+    color: var(--sage);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+
+  /* ─── SPECIALS BAR ─── */
+  .specials {
+    background: var(--olive);
+    padding: 3.5rem 3rem;
+  }
+
+  .specials-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .specials .section-tag { color: var(--gold-light); }
+  .specials .section-title { color: var(--cream); font-size: 1.8rem; margin-bottom: 2.5rem; }
+
+  .specials-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .special-item {
+    padding: 1.5rem;
+    background: rgba(245,240,232,0.06);
+    border-radius: 6px;
+    border: 1px solid rgba(245,240,232,0.06);
+  }
+
+  .special-day {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .special-deal {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--cream);
+    line-height: 1.35;
+  }
+
+  /* ─── KITCHEN NOTE ─── */
+  .kitchen-note {
+    text-align: center;
+    padding: 2.5rem 3rem;
+    font-size: 0.85rem;
+    color: var(--sage);
+    font-weight: 300;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 4rem 3rem 2rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; max-width: 1200px;
+    margin: 0 auto 3rem;
+  }
+
+  .footer-brand .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem; color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.85rem; color: rgba(245,240,232,0.45);
+    line-height: 1.65; max-width: 300px; font-weight: 300;
+  }
+
+  .footer-heading {
+    font-size: 0.65rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.25rem; font-weight: 500;
+  }
+
+  .footer-links {
+    list-style: none; display: flex;
+    flex-direction: column; gap: 0.65rem;
+  }
+
+  .footer-links a {
+    color: rgba(245,240,232,0.55); text-decoration: none;
+    font-size: 0.85rem; transition: color 0.3s; font-weight: 300;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-bottom {
+    max-width: 1200px; margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(245,240,232,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 0.75rem; color: rgba(245,240,232,0.3); font-weight: 300;
+  }
+
+  .footer-socials { display: flex; gap: 1.25rem; }
+
+  .footer-socials a {
+    color: rgba(245,240,232,0.4); text-decoration: none;
+    font-size: 0.8rem; transition: color 0.3s;
+  }
+
+  .footer-socials a:hover { color: var(--gold); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .menu-items { grid-template-columns: 1fr; }
+    .tap-grid { grid-template-columns: 1fr; }
+    .also-grid { grid-template-columns: 1fr 1fr; }
+    .specials-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 0 1.5rem; }
+    nav { display: none; }
+    .mobile-toggle { display: flex; }
+
+    .page-hero { padding: 0 1.5rem 3rem; height: 38vh; min-height: 280px; }
+    .menu-nav { padding: 0 1.5rem; overflow-x: auto; }
+    .menu-nav a { padding: 0.85rem 1rem; white-space: nowrap; font-size: 0.7rem; }
+
+    .food-menu { padding: 3rem 1.5rem; }
+    .on-tap { padding: 3.5rem 1.5rem; }
+    .also-available { padding: 3rem 1.5rem; }
+    .also-grid { grid-template-columns: 1fr; }
+    .specials { padding: 3rem 1.5rem; }
+    .specials-grid { grid-template-columns: 1fr; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    footer { padding: 3rem 1.5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header>
+  <a href="/" class="logo">
+    <div class="logo-mark">P</div>
+    <div class="logo-text">
+      Patch Brewing
+      <span>Gordonsville, VA</span>
+    </div>
+  </a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="#" class="active">Menu</a>
+    <a href="/events">Events</a>
+    <a href="/private-events">Private Events</a>
+    <a href="/order" class="nav-cta">Order Online</a>
+  </nav>
+  <button class="mobile-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="page-hero-bg">
+    <div class="page-hero-placeholder">&lt;src: hero — food truck or burger close-up&gt;</div>
+  </div>
+  <div class="page-hero-content">
+    <div class="page-hero-tag">County Line Food Truck + Taproom</div>
+    <h1>What's on the Menu</h1>
+    <p>Smash burgers, German bratwursts, award-winning craft beer, and everything in between. Kitchen open every day we are.</p>
+  </div>
+</section>
+
+<!-- ══════════ MENU NAV ══════════ -->
+<div class="menu-nav">
+  <a href="#food" class="active">Food Truck</a>
+  <a href="#on-tap">On Tap</a>
+  <a href="#specials">Daily Specials</a>
+</div>
+
+<!-- ══════════ FOOD MENU ══════════ -->
+<section class="food-menu" id="food">
+  <div class="food-menu-header">
+    <div class="section-tag">County Line Food Truck</div>
+    <h2 class="section-title">Food Menu</h2>
+    <p>Served every day we're open. Inside seating available. Kitchen closes at 8 PM.</p>
+  </div>
+
+  <!-- Smash Burgers -->
+  <div class="menu-category">
+    <div class="menu-category-name">Smash Burgers</div>
+    <div class="menu-category-note">Served with side fries or onion rings. Substitute 3oz NoBull veggie burger for $2.</div>
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">The Patch Burger</span>
+          <span class="menu-item-price">$12.50</span>
+        </div>
+        <div class="menu-item-desc">3.3oz Seven Hills Beef, potato bun, beer cheese, bacon, american cheese, grilled onions, pickles, Patch Sauce</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Cowboy Bill Burger</span>
+          <span class="menu-item-price">$12.50</span>
+        </div>
+        <div class="menu-item-desc">3.3oz Seven Hills Beef, potato bun, bacon, american cheese, onion ring, BBQ sauce</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Hot &amp; Messy Burger</span>
+          <span class="menu-item-price">$12.50</span>
+        </div>
+        <div class="menu-item-desc">3.3oz Seven Hills Beef, potato bun, beer cheese, bacon crumbles, diced cherry peppers</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">The Classic Burger</span>
+          <span class="menu-item-price">$12.50</span>
+        </div>
+        <div class="menu-item-desc">3.3oz Seven Hills Beef, potato bun, american cheese, onion, pickles, lettuce, tomato</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">The Brunch Royale Burger</span>
+          <span class="menu-item-price">$13</span>
+        </div>
+        <div class="menu-item-desc">3.3oz Seven Hills Beef, potato bun, fried egg, bacon-onion hash, maple glaze, american cheese</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">The Cow Jumped Over The Shroom</span>
+          <span class="menu-item-price">$13</span>
+        </div>
+        <div class="menu-item-desc">3.3oz Seven Hills Beef, potato bun, bacon, swiss cheese, mushrooms, grilled onions, basil &amp; horseradish aioli</div>
+      </div>
+    </div>
+
+    <div class="menu-extras">
+      <div class="menu-extras-title">Add-Ons &amp; Toppings</div>
+      <div class="menu-extras-row">
+        <span class="menu-extras-item"><strong>$0.50 sauces:</strong> Buffalo, Ranch, Patch Sauce, Honey Mustard, BBQ</span>
+      </div>
+      <div class="menu-extras-row" style="margin-top: 0.4rem;">
+        <span class="menu-extras-item"><strong>$0.50 toppings:</strong> Grilled onions, cherry peppers, lettuce, tomato, extra cheese, extra sauce, sauerkraut, dill pickles, raw onions</span>
+      </div>
+      <div class="menu-extras-row" style="margin-top: 0.4rem;">
+        <span class="menu-extras-item"><strong>$1 toppings:</strong> Beer cheese, chili, onion ring</span>
+      </div>
+      <div class="menu-extras-row" style="margin-top: 0.4rem;">
+        <span class="menu-extras-item"><strong>$2 toppings:</strong> Mushrooms, bacon, fried egg, gluten free bun, extra patty, NoBull substitute</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- German Pork Bratwursts -->
+  <div class="menu-category">
+    <div class="menu-category-name">German Pork Bratwursts</div>
+    <div class="menu-category-note">Served with side fries or onion rings.</div>
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Hot and Messy Brat</span>
+          <span class="menu-item-price">$12.50</span>
+        </div>
+        <div class="menu-item-desc">1/4lb pork bratwurst, potato bun, beer cheese, grilled onions, bacon crumbles, diced cherry peppers</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">The Patch Brat</span>
+          <span class="menu-item-price">$12.50</span>
+        </div>
+        <div class="menu-item-desc">1/4lb pork bratwurst, potato bun, bacon, american cheese, grilled onions, dill pickles, Patch Sauce</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">The MushSwiss Brat</span>
+          <span class="menu-item-price">$13</span>
+        </div>
+        <div class="menu-item-desc">1/4lb pork bratwurst, potato bun, bacon, swiss cheese, mushrooms, grilled onions, basil &amp; horseradish aioli</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Classic German Brat</span>
+          <span class="menu-item-price">$12</span>
+        </div>
+        <div class="menu-item-desc">1/4lb pork bratwurst, potato roll, sauerkraut on the side</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kids Menu -->
+  <div class="menu-category">
+    <div class="menu-category-name">Kids Menu</div>
+    <div class="menu-category-note">For the little ones.</div>
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Chicken Tender Basket</span>
+          <span class="menu-item-price">$10</span>
+        </div>
+        <div class="menu-item-desc">Two tenders, fries or fruit cup, choice of dipping sauce. Add a tender +$2.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Just A Hot Dog</span>
+          <span class="menu-item-price">$7</span>
+        </div>
+        <div class="menu-item-desc">100% beef frank on potato roll, fries or fruit cup. Add chili and cheese +$1.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">A Grilled Cheese Sandwich</span>
+          <span class="menu-item-price">$7</span>
+        </div>
+        <div class="menu-item-desc">American cheese on potato roll, fries or fruit cup. Add tomato &amp; bacon +$2.50.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Just A Cheeseburger</span>
+          <span class="menu-item-price">$10</span>
+        </div>
+        <div class="menu-item-desc">3.3oz Seven Hills Beef, american cheese, fries or fruit cup</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Baskets, Shareables, Salads -->
+  <div class="menu-category">
+    <div class="menu-category-name">Baskets, Shareables &amp; Salads</div>
+    <div class="menu-items">
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Basket of French Fries</span>
+          <span class="menu-item-price">$7</span>
+        </div>
+        <div class="menu-item-desc">Choice of dipping sauce</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Basket of Onion Rings</span>
+          <span class="menu-item-price">$8</span>
+        </div>
+        <div class="menu-item-desc">Choice of dipping sauce</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Basket of Cheese Curds</span>
+          <span class="menu-item-price">$9</span>
+        </div>
+        <div class="menu-item-desc">Choice of dipping sauce</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Patch Nachos</span>
+          <span class="menu-item-price">$9</span>
+        </div>
+        <div class="menu-item-desc">Tortilla chips, chili, beer cheese, peppers, raw onion, bacon</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Chili Cheese Bacon Fries</span>
+          <span class="menu-item-price">$9</span>
+        </div>
+        <div class="menu-item-desc">Fries, chili, beer cheese, pepper relish, bacon</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Caesar Salad</span>
+          <span class="menu-item-price">$8</span>
+        </div>
+        <div class="menu-item-desc">Romaine, croutons, parmesan, bacon bits, caesar dressing. Add chicken +$3.</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-top">
+          <span class="menu-item-name">Mixed Greens</span>
+          <span class="menu-item-price">$8</span>
+        </div>
+        <div class="menu-item-desc">Greenleaf and romaine, tomato, cheddar bits, bacon bits, croutons, ranch dressing. Add chicken +$3.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ON TAP ══════════ -->
+<section class="on-tap" id="on-tap">
+  <div class="on-tap-inner">
+    <div class="on-tap-header">
+      <div class="section-tag">Brewed On-Site</div>
+      <h2 class="section-title">What's on Tap</h2>
+      <p>All beers brewed right here at Patch. Tap list rotates — check back often or just come in and ask what's new.</p>
+    </div>
+
+    <div class="tap-grid">
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Lempicky Light Lager</span>
+          <span class="tap-item-price">$7</span>
+        </div>
+        <div class="tap-item-style">American Light Lager</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">4.3% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Ryevanna IPA</span>
+          <span class="tap-item-price">$9</span>
+        </div>
+        <div class="tap-item-style">Rye IPA</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">7.9% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Pylon Pilsner</span>
+          <span class="tap-item-price">$8</span>
+        </div>
+        <div class="tap-item-style">German Pilsner</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">4.9% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Fox Hole IPA</span>
+          <span class="tap-item-price">$9</span>
+        </div>
+        <div class="tap-item-style">New England Juicy IPA</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">5.9% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">V I P Very Italian Pilsner</span>
+          <span class="tap-item-price">$8</span>
+        </div>
+        <div class="tap-item-style">Italian Pilsner</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">5.0% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Bases Loaded</span>
+          <span class="tap-item-price">$9</span>
+        </div>
+        <div class="tap-item-style">Double IPA</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">7.5% ABV · 16oz</span>
+          <span class="tap-item-award">Silver 2025 · Gold 2024, VA Craft Beer Cup</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Goldensville Lager</span>
+          <span class="tap-item-price">$8</span>
+        </div>
+        <div class="tap-item-style">Dortmunder/Export Lager</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">6.0% ABV · 16oz</span>
+          <span class="tap-item-award">Silver 2024 VA CBC &amp; US Open / Bronze VA CBC 2025</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Home Run Hefe</span>
+          <span class="tap-item-price">$8</span>
+        </div>
+        <div class="tap-item-style">German Hefeweizen</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">4.6% ABV · 16oz</span>
+          <span class="tap-item-award">Gold, VA Craft Beer Cup 2023 &amp; 2024</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Das Patchinator</span>
+          <span class="tap-item-price">$9</span>
+        </div>
+        <div class="tap-item-style">Doppelbock</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">7.5% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Bavarian Bonfire</span>
+          <span class="tap-item-price">$8.50</span>
+        </div>
+        <div class="tap-item-style">Smoked Hefeweizen</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">5.1% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">A Stone in the Woods</span>
+          <span class="tap-item-price">$8</span>
+        </div>
+        <div class="tap-item-style">English Brown Ale</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">4.9% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Home Field Advantage</span>
+          <span class="tap-item-price">$8</span>
+        </div>
+        <div class="tap-item-style">Robust Porter</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">5.5% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Strawberry Kiwicidence</span>
+          <span class="tap-item-price">$8</span>
+        </div>
+        <div class="tap-item-style">Fruited Sour</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">4.8% ABV · 16oz</span>
+        </div>
+      </div>
+
+      <div class="tap-item">
+        <div class="tap-item-top">
+          <span class="tap-item-name">Company 24</span>
+          <span class="tap-item-price">$8</span>
+        </div>
+        <div class="tap-item-style">Irish Red Ale</div>
+        <div class="tap-item-meta">
+          <span class="tap-item-abv">5% ABV · 16oz</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ALSO AVAILABLE ══════════ -->
+<section class="also-available">
+  <div class="section-tag">Not Just Beer</div>
+  <h2 class="section-title">Also Available</h2>
+  <div class="also-grid">
+    <div class="also-card">
+      <div class="also-icon">🍷</div>
+      <div class="also-name">Local Wine</div>
+      <div class="also-desc">Virginia wines from nearby vineyards</div>
+    </div>
+    <div class="also-card">
+      <div class="also-icon">🍎</div>
+      <div class="also-name">Local Cider</div>
+      <div class="also-desc">Craft ciders from Virginia cideries</div>
+    </div>
+    <div class="also-card">
+      <div class="also-icon">🍹</div>
+      <div class="also-name">Canned Cocktails</div>
+      <div class="also-desc">Ready-to-drink cocktails &amp; seltzers</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DAILY SPECIALS ══════════ -->
+<section class="specials" id="specials">
+  <div class="specials-inner">
+    <div class="section-tag">Happy Hours &amp; Specials</div>
+    <h2 class="section-title">Daily Deals</h2>
+    <div class="specials-grid">
+      <div class="special-item">
+        <div class="special-day">Monday</div>
+        <div class="special-deal">$2 Hot Dogs All Day</div>
+      </div>
+      <div class="special-item">
+        <div class="special-day">Wednesday</div>
+        <div class="special-deal">$7 Cheeseburger + Fries</div>
+      </div>
+      <div class="special-item">
+        <div class="special-day">Thursday</div>
+        <div class="special-deal">$5 Pints After 5 PM<br>½ Off Shareables After 5 PM</div>
+      </div>
+      <div class="special-item">
+        <div class="special-day">Nightly Prizes</div>
+        <div class="special-deal">Bingo: $20 &amp; $10 GC<br>Trivia: $50 &amp; $20 GC<br>Cards Night: $10 GC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ KITCHEN NOTE ══════════ -->
+<div class="kitchen-note">
+  Kitchen closes at 8 PM · Menu items and prices subject to change · Please inform your server of any allergies
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text" style="margin-bottom: 0.75rem;">
+        Patch Brewing Co.
+        <span>Gordonsville, Virginia</span>
+      </div>
+      <p>Award-winning beers, mouthwatering smash burgers, and vibes for days. Bring the family and enjoy live music, community events, and more.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Visit</div>
+      <ul class="footer-links">
+        <li><a href="#">10271 Gordon Ave</a></li>
+        <li><a href="#">Gordonsville, VA 22942</a></li>
+        <li><a href="tel:5404668536">(540) 466-8536</a></li>
+        <li><a href="mailto:info@patchbrewingco.com">info@patchbrewingco.com</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Explore</div>
+      <ul class="footer-links">
+        <li><a href="/menu">Menu</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/private-events">Private Events</a></li>
+        <li><a href="/order">Order Online</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Hours</div>
+      <ul class="footer-links">
+        <li><a href="#">Mon–Tue: Closed</a></li>
+        <li><a href="#">Wed–Thu: 12–8 PM</a></li>
+        <li><a href="#">Fri–Sat: 12–10 PM</a></li>
+        <li><a href="#">Sunday: 12–8 PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Patch Brewing Company. All rights reserved.</div>
+    <div class="footer-socials">
+      <a href="https://facebook.com/patchbrewingco" target="_blank">Facebook</a>
+      <a href="https://instagram.com/patchbrewingco" target="_blank">Instagram</a>
+      <a href="https://tiktok.com/@patchbrewingco" target="_blank">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

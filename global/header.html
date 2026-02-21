@@ -1,0 +1,193 @@
+<!-- ══════════ GLOBAL HEADER ══════════ -->
+<!-- Add this CSS to your global styles or site-wide stylesheet -->
+<style>
+  /* ─── HEADER ─── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 3rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(26, 29, 26, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--cream);
+  }
+
+  .logo-mark {
+    width: 40px; height: 40px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+  }
+
+  .logo-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+  }
+
+  .logo-text span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    margin-top: -1px;
+  }
+
+  nav { display: flex; align-items: center; gap: 2rem; }
+
+  nav a {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    opacity: 0.75;
+    transition: opacity 0.3s;
+    font-weight: 400;
+  }
+
+  nav a:hover { opacity: 1; }
+  nav a.active { opacity: 1; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    opacity: 1 !important;
+    padding: 0.55rem 1.25rem;
+    border-radius: 3px;
+    font-weight: 500;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light); }
+
+  .mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+    padding: 4px;
+  }
+
+  .mobile-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--cream);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* Mobile nav overlay */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0; bottom: 0;
+    background: rgba(26, 29, 26, 0.97);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .mobile-nav.open { display: flex; }
+
+  .mobile-nav a {
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+    font-weight: 400;
+  }
+
+  .mobile-nav a:hover { opacity: 1; }
+  .mobile-nav a.active { opacity: 1; color: var(--gold); }
+
+  .mobile-nav .nav-cta {
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 0 1.5rem; }
+    nav { display: none; }
+    .mobile-toggle { display: flex; }
+  }
+</style>
+
+<!-- Header HTML -->
+<header>
+  <a href="/" class="logo">
+    <div class="logo-mark">P</div>
+    <div class="logo-text">
+      Patch Brewing
+      <span>Gordonsville, VA</span>
+    </div>
+  </a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/menu">Menu</a>
+    <a href="/events">Events</a>
+    <a href="/private-events">Private Events</a>
+    <a href="/order" class="nav-cta" target="_blank">Order Online</a>
+  </nav>
+  <button class="mobile-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="/">Home</a>
+  <a href="/menu">Menu</a>
+  <a href="/events">Events</a>
+  <a href="/private-events">Private Events</a>
+  <a href="/order" class="nav-cta" target="_blank">Order Online</a>
+</div>
+
+<script>
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const toggle = document.querySelector('.mobile-toggle');
+  nav.classList.toggle('open');
+  // Animate hamburger to X
+  const spans = toggle.querySelectorAll('span');
+  if (nav.classList.contains('open')) {
+    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    document.body.style.overflow = 'hidden';
+  } else {
+    spans[0].style.transform = 'none';
+    spans[1].style.opacity = '1';
+    spans[2].style.transform = 'none';
+    document.body.style.overflow = '';
+  }
+}
+</script>
