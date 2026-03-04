@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Events | Patch Brewing Company</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="happenings.css">
+<link rel="stylesheet" href="/pages/happenings/happenings.css">
 <style>
   :root {
     --cream: #F5F0E8;
@@ -623,7 +623,55 @@
 </head>
 <body>
 
-<!-- Global header loads here -->
+<header>
+  <a href="/" class="logo">
+    <div class="logo-mark">P</div>
+    <div class="logo-text">
+      Patch Brewing
+      <span>Gordonsville, VA</span>
+    </div>
+  </a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/menu">Menu</a>
+    <a href="/events">Events</a>
+    <a href="/private-events">Private Events</a>
+    <a href="/order" class="nav-cta" target="_blank">Order Online</a>
+  </nav>
+  <button class="mobile-toggle" aria-label="Toggle menu" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="/">Home</a>
+  <a href="/menu">Menu</a>
+  <a href="/events">Events</a>
+  <a href="/private-events">Private Events</a>
+  <a href="/order" class="nav-cta" target="_blank">Order Online</a>
+</div>
+
+<script>
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const toggle = document.querySelector('.mobile-toggle');
+  nav.classList.toggle('open');
+  // Animate hamburger to X
+  const spans = toggle.querySelectorAll('span');
+  if (nav.classList.contains('open')) {
+    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+    document.body.style.overflow = 'hidden';
+  } else {
+    spans[0].style.transform = 'none';
+    spans[1].style.opacity = '1';
+    spans[2].style.transform = 'none';
+    document.body.style.overflow = '';
+  }
+}
+</script>
 
 <!-- ══════════ PAGE HERO ══════════ -->
 <section class="page-hero">
@@ -987,7 +1035,53 @@
   <a href="/private-events" class="btn btn-primary">View Private Events →</a>
 </section>
 
-<!-- Global footer loads here -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">
+        Patch Brewing Co.
+        <span>Gordonsville, Virginia</span>
+      </div>
+      <p>Award-winning beers, mouthwatering smash burgers, and vibes for days. Bring the family and enjoy live music, community events, and more.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Visit</div>
+      <ul class="footer-links">
+        <li><a href="https://maps.google.com/?q=10271+Gordon+Ave+Gordonsville+VA+22942" target="_blank">10271 Gordon Ave</a></li>
+        <li><a href="https://maps.google.com/?q=10271+Gordon+Ave+Gordonsville+VA+22942" target="_blank">Gordonsville, VA 22942</a></li>
+        <li><a href="tel:5404668536">(540) 466-8536</a></li>
+        <li><a href="mailto:info@patchbrewingco.com">info@patchbrewingco.com</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Explore</div>
+      <ul class="footer-links">
+        <li><a href="/menu">Menu</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/private-events">Private Events</a></li>
+        <li><a href="/order" target="_blank">Order Online</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Hours</div>
+      <ul class="footer-links">
+        <li><a href="#">Mon: 12–8 PM</a></li>
+        <li><a href="#">Tue: Closed</a></li>
+        <li><a href="#">Wed–Thu: 12–8 PM</a></li>
+        <li><a href="#">Fri–Sat: 12–9 PM</a></li>
+        <li><a href="#">Sun: 12–8 PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Patch Brewing Company. All rights reserved.</div>
+    <div class="footer-socials">
+      <a href="https://facebook.com/patchbrewingco" target="_blank">Facebook</a>
+      <a href="https://instagram.com/patchbrewingco" target="_blank">Instagram</a>
+      <a href="https://tiktok.com/@patchbrewingco" target="_blank">TikTok</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
